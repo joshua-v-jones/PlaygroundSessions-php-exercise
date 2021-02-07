@@ -102,3 +102,42 @@ If you used Docker or Ansible, the root mysql password is the same as the playgr
 ## Go!
 
 We look forward to seeing your code! 
+
+Personal Notes
+----------------------------------------
+
+Completed Tasks:
+
+- Setup a Linux Mint VM from scratch using vmware.
+- Created a GIT REPO for the project at https://github.com/joshua-v-jones/PlaygroundSessions-php-exercise.
+- Setup the development environment for the project using the ansible instructions.
+	- Had a few roadblocks with the PHP environment. The issue lied with the PDO driver missing from the PHP installation.
+	- Error 
+		Explanation: After setting up the environment I could go to the index page and see the Lumen Framework page. When attempting to access http://localhost:8000/student-progress/1 I recieved a PDO error accessing the database. 
+		Fix: I determined the issue lied with PHP being unable to see the PDO connection for mysql. I purged and reinstalled php and that fixed the issue.
+- Made the first git commit.
+- Setup eclipse in main OS using a shared folder with the Linux Mint VM.
+- With a fully functional application and enviroment I could get to work.
+- Being unfamiliar with Lumen entirely I needed to do a brush up course to determine how the Models were being generated from the DB schema.
+- Created some notes on Lumen Migrations as I was unfamiliar.
+
+IMPORTANT COMMANDS:
+
+Creating a model migration:
+(model is arbitrary in the command)
+1 - run the command -> php artisan make:migration create_model_table 
+	Explanation:
+		This command will make a migration file that needs to be MODIFIED with our custom columns or fields to be added on the model.
+2 - Modify the generated migration file at database/migrations. It has a needed timestamp for the migrations.
+3 - Run the command -> php artisan migrate
+	Explanation: 
+		Creates the table in the DB using the migration generated and modified in step 1 and 2.
+4 - Check the DB for the new Model.
+5 - Create the model. in app/Model.php
+
+
+USEFUL SITES:
+Good getting started page to understand the schema first approach used in this example project.
+https://auth0.com/blog/developing-restful-apis-with-lumen/
+
+
