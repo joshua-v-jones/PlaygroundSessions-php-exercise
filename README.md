@@ -120,6 +120,8 @@ Completed Tasks:
 - With a fully functional application and enviroment I could get to work.
 - Being unfamiliar with Lumen entirely I needed to do a brush up course to determine how the Models were being generated from the DB schema.
 - Created some notes on Lumen Migrations as I was unfamiliar.
+- With much concepulization, I have a solution to decouple front end data structure from the DB by using a SQL VIEW. 
+- Created the initial migration and put in skeleton code for the migration. 
 
 IMPORTANT COMMANDS:
 
