@@ -3,56 +3,24 @@ namespace app\Models;
 
 /**
  *
- * * Small model class that will harness the existing eloquent 
- *  models to create the desired data structure for a single student lesson.
+ * * Small static class that will harness the existing eloquent 
+ *  models to query the Db for the data and return the desired data needed for the new structure
  *
  * @author jj
  *        
  */
-class StudentLesson
+class StudentLessonHelper
 {
-
-    //Integer used to store the lesson ID of this particular student lesson
-    private $lesson_id;
-    //String used to get the difficulty of the lesson 
-    //and transform it to the desired data structure
-    private $difficulty;
     //An array of possible difficulty strings to be used in the setting of the difficulty
     private $difficulty_categories = array("Rookie", "Intermediate", "Advanced");
     //Difficulty used if number is not 1 - 9 
     private $unknown_difficulty = "UNKNOWN";
-    //Boolean used to get the completioness of a lesson into the correct structure
-    private $isComplete;
-    
-    /**
-     * Empty constructor
-     */
-    public function __construct($lesson_id)
-    {
-        $this->lesson_id = $lesson_id;
-    }
-    
-    /**
-     * @return mixed
-     */
-    public function getDifficulty()
-    {
-        return $this->difficulty;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIsComplete()
-    {
-        return $this->isComplete;
-    }
     /**
      * This function will be used to convert the DB value to the desired
      * string of Rookie [1,2,3] Intermediate[4,5,6] and Advanced[7,8,9]
      * @param integer $difficulty Must be a vlaue between 1-9
      */
-    public function setDifficulty($difficulty)
+    public static function getDifficulty($difficulty)
     {
         switch ($difficulty)
         {
@@ -78,11 +46,13 @@ class StudentLesson
     }
 
     /**
-     * @param mixed $isComplete
+     * This function will be used to determine if a lesson is complete by 
+     * simply passing the lesson id to the function
+     * @param int $lessonID the id of the lesson to determine completness
      */
-    public function setIsComplete()
+    public static function getIsComplete($lessonID)
     {
-        $segments = Segment::all()->where('lesson_id','==', $this->lesson_id);
+        $segments = Segment::all()->where('lesson_id','==', $lessonID);
         $isLessonComplete = true;
         //Go through all segments for the current lesson
         foreach ($segments as $nextSegment)
