@@ -21,6 +21,7 @@ class StudentLesson
     private $isComplete;
     
     /**
+     * Empty constructor
      */
     public function __construct()
     {
