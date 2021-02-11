@@ -1,5 +1,7 @@
 <?php
-namespace app\Models;
+namespace app\Models\Helpers;
+
+use App\Models\Segment;
 
 /**
  *
