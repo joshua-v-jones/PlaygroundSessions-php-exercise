@@ -107,7 +107,11 @@ Personal Notes
 ----------------------------------------
 
 Completed Tasks:
-
+2-15-2021:
+- Moved uncompleted changes to new branch BrokenComposerBuild to maintain a clean application version. 
+- Ran "php composer.phar update" and discovered some issues in missing packages for CURL and phpunit.
+- Installed missing packages and reran the composer.phar update with no issues.
+2-09-2021:
 - Setup a Linux Mint VM from scratch using vmware.
 - Created a GIT REPO for the project at https://github.com/joshua-v-jones/PlaygroundSessions-php-exercise.
 - Setup the development environment for the project using the ansible instructions.
