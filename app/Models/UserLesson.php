@@ -5,13 +5,14 @@ namespace App\Models;
 
 use JsonSerializable;
 
-/*
+/**
  *  App\Models\UserLesson
  *  A JSONSerializable model class used to seperate the data structure 
  *  defined by the DB schema to the desired simplified structure.
  *  
  *  Represent a single Lesson by a user
  *  
+ *  @author jj
  */
 class UserLesson implements JsonSerializable
 {
@@ -47,8 +48,8 @@ class UserLesson implements JsonSerializable
     }
 
     /*
-     * Required function by JsonSeriliable used to easily get the model in JSON format by calling json_encode
-     * or embedding into another JsonSerialiable object
+     * Required function by JsonSerilizable used to get the UserLesson object into the desired format
+     * This will be the JSON format returned when $this object is json_encoded
      */
     public function jsonSerialize()
     {

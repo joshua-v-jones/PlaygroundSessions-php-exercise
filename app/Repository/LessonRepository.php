@@ -2,7 +2,7 @@
 namespace App\Repository;
 /**
  * Database repository to perform DB queries necessary for
- * the lesson model
+ * the LessonViewModel
  * @author jj
  *
  */
@@ -25,7 +25,6 @@ class LessonRepository
         ->where('is_published',true)
         ->limit(5)
         ->get();
-         //Lesson::all()->where([['user_id','=', $userId],['is_published', '=', 'true']])->toArray();
     }
     /**
      * Gets all segments for a particular lesson

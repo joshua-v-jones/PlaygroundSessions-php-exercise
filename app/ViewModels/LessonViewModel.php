@@ -17,16 +17,18 @@ class LessonViewModel
     {
         //Create a new UserLesson object to populate with requested data
         $userLessons = new UserLessons();
+        //Use the LessonRepo to get all Lessons by user
         $lessonsByUserId = LessonRepository::getLessonsByUser($userId);
 
+        //Iterate all lesson for a user and add them to the UserLessons model
         foreach ($lessonsByUserId as $nextLesson)
         {            
             $lessonSegments = LessonRepository::getLessonSegments($nextLesson->id);
             $userLessons->addUserLesson($nextLesson, $lessonSegments);
         }
 
+        //Simply returning the UserLesson object is all that is needed as Illimunate and JsonSerializable do the rest.
         return $userLessons;
-        //return $userLessons->toJson();
     }
 
 }
