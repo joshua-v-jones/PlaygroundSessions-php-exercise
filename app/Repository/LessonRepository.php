@@ -8,7 +8,6 @@ namespace App\Repository;
  */
 use App\Models\Lesson;
 use App\Models\Segment;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class LessonRepository
 {
@@ -19,19 +18,15 @@ class LessonRepository
      */
     public static function getLessonsByUser($userId)
     {
-        return Lesson::with(['segments','segments.practiceRecords' => function(HasMany $query) use ($userId) {
-            $query->where('user_id', $userId);
-        }])
-        ->where('is_published',true)
-        ->get()
-        ->toArray();
+       
+        return Lesson::all()->where([['user_id','=', $userId],['is_published', '=', 'true']])->toArray();
     }
     /**
      * Gets all segments for a particular lesson
      */
     public static function getLessonSegments($lessonId)
     {
-        $segments = Segment::all()->where('lesson_id','==', $lessonId);
+        $segments = Segment::all()->where('lesson_id','==', $lessonId)->toArray();
         return $segments;
     }
 }
