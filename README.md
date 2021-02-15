@@ -108,6 +108,17 @@ Personal Notes
 
 Completed Tasks:
 
+2-15-2021:
+
+-Moved uncompleted changes to new branch BrokenComposerBuild to maintain a clean application version.
+-Ran "php composer.phar update" and discovered some issues in missing packages for CURL and phpunit.
+-Installed missing packages and reran the composer.phar update with no issues. 
+-Composer was never the issue. Restarted work on the changes with a Fresh master branch build solved the issue.
+-Moved new work to another new branch called "WorkingComposerBuild"
+-Continued work on the problem and created 2 new models (to represent the new data structure), a repository (to perform DB calls), and a viewmodel (to harness the new models, and repository to provide the data to the view, in this case a rest endpoint in JSON format). 
+-Finshed logic to decouple the database from the desired Data Structure. Functional but unfortunately not efficent and required a limiter on the query. Considering a migration to get lessons by user_id.
+
+2-09-2021:
 - Setup a Linux Mint VM from scratch using vmware.
 - Created a GIT REPO for the project at https://github.com/joshua-v-jones/PlaygroundSessions-php-exercise.
 - Setup the development environment for the project using the ansible instructions.
