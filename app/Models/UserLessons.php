@@ -10,21 +10,17 @@ class UserLessons implements Jsonable
     //An array of UserLesson objects ready to be consumbed by a REST endpoint
     private $userLessons;
     
-    public function __construct($lessons, $segments)
+    public function __construct()
     {
-        $this->setUserLessons($lessons, $segments);
     }
-    
     /**
-     * @param Lesson $lessons A list of lessons for a particular user
+     * @param Lesson $lesson A single lesson to add to the array of lessons for the User
+     * @param Segment $lessonSegments List of all lesson segments for the given lesson
      */
-    public function setUserLessons($lessons, $segments)
+    public function addUserLesson($lesson, $lessonSegments)
     {
-        foreach ($userLessons as $nextUserLesson)
-        {
-            $newUserLesson = new UserLesson($nextUserLesson, $segments);
-            $this->userLessons[] = $newUserLesson;
-        }
+        $newUserLesson = new UserLesson($lesson, $lessonSegments);
+        $this->userLessons[] = $newUserLesson;
     }
 
     public function toJson($options = 0)
