@@ -10,20 +10,19 @@ class UserLessons implements Jsonable
     //An array of UserLesson objects ready to be consumbed by a REST endpoint
     private $userLessons;
     
-    public function __construct($lessons)
+    public function __construct($lessons, $segments)
     {
-        $this->setUserLessons($lessons);
+        $this->setUserLessons($lessons, $segments);
     }
     
     /**
      * @param Lesson $lessons A list of lessons for a particular user
      */
-    public function setUserLessons($lessons)
+    public function setUserLessons($lessons, $segments)
     {
         foreach ($userLessons as $nextUserLesson)
         {
-            $nextLessonSegments = LessonRepository::getLessonSegments($nextUserLesson->id);
-            $newUserLesson = new UserLesson($nextUserLesson, $nextLessonSegments);
+            $newUserLesson = new UserLesson($nextUserLesson, $segments);
             $this->userLessons[] = $newUserLesson;
         }
     }
