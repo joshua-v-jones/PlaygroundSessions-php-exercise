@@ -1,34 +1,49 @@
 <?php
-namespace app\Models\Helpers;
+namespace app\Viewmodels;
 
-use App\Models\Segment;
+use app\Repository\LessonRepository;
 
 /**
- *
- * * Small static class that will harness the existing eloquent 
- *  models to query the Db for the data and return the desired data needed for the new structure
+ *  Lesson View Model class used to seperate the Db models and queries from the view
  *
  * @author jj
  *        
  */
-class StudentLessonHelper
+class LessonViewModel
 {
+    //The id of the lesson
+    private $id;
+    //The current difficulty to be set using the categories
+    private $difficulty;
     //An array of possible difficulty strings to be used in the setting of the difficulty
     private $difficulty_categories = array("Rookie", "Intermediate", "Advanced");
-    //Difficulty used if number is not 1 - 9 
+    //Difficulty used if number is not 1 - 9
     private $unknown_difficulty = "UNKNOWN";
+    //Boolean to be set based on segments within.
+    private $isComplete;
+    
+    /**
+     * @param @app/Models/Lesson $lesson a raw DB object to be parsed and put into the new dta structure
+     */
+    public function __construct($lesson)
+    {
+        $this->id = $lesson->id;
+        $this->difficulty = LessonViewModel::getDifficulty($lesson->difficulty);
+        $this->isComplete = LessonViewModel::getIsComplete($lesson->id);
+    }
+    
     /**
      * This function will be used to convert the DB value to the desired
      * string of Rookie [1,2,3] Intermediate[4,5,6] and Advanced[7,8,9]
      * @param integer $difficulty Must be a vlaue between 1-9
      */
-    public static function getDifficulty($difficulty)
+    private static function getDifficulty($difficulty)
     {
         switch ($difficulty)
         {
             case 1:
             case 2:
-            case 3:                
+            case 3:
                 $this->difficulty = $this->difficulty_categories[0];
                 break;
             case 4:
@@ -44,17 +59,17 @@ class StudentLessonHelper
             default:
                 $this->difficulty= $this->unknown_difficulty;
                 break;
-        }            
+        }
     }
-
+    
     /**
-     * This function will be used to determine if a lesson is complete by 
+     * This function will be used to determine if a lesson is complete by
      * simply passing the lesson id to the function
      * @param int $lessonID the id of the lesson to determine completness
      */
-    public static function getIsComplete($lessonID)
+    private static function getIsComplete($lessonId)
     {
-        $segments = Segment::all()->where('lesson_id','==', $lessonID);
+        $segments = LessonRepository::getLessonSegments($lessonId);
         $isLessonComplete = true;
         //Go through all segments for the current lesson
         foreach ($segments as $nextSegment)
@@ -74,7 +89,7 @@ class StudentLessonHelper
                     break;
                 }
             }
-            //If a sigle non-complete segment is found the lesson is incomplete 
+            //If a sigle non-complete segment is found the lesson is incomplete
             //and we can stop iterating
             //Check if the segment is NOT complete
             if(!$isSegmentComplete)
