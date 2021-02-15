@@ -18,12 +18,15 @@ class LessonViewModel
         //Create a new UserLesson object to populate with requested data
         $userLessons = new UserLessons();
         $lessonsByUserId = LessonRepository::getLessonsByUser($userId);
+
         foreach ($lessonsByUserId as $nextLesson)
-        {
+        {            
             $lessonSegments = LessonRepository::getLessonSegments($nextLesson->id);
             $userLessons->addUserLesson($nextLesson, $lessonSegments);
         }
-        return $userLessons->toJson();
+
+        return $userLessons;
+        //return $userLessons->toJson();
     }
 
 }

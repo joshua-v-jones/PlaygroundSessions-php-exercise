@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use JsonSerializable;
 use Illuminate\Contracts\Support\Jsonable;
-use App\Repository\LessonRepository;
 
-class UserLessons implements Jsonable
+class UserLessons implements JsonSerializable, Jsonable
 {
     //An array of UserLesson objects ready to be consumbed by a REST endpoint
     private $userLessons;
@@ -22,9 +22,14 @@ class UserLessons implements Jsonable
         $newUserLesson = new UserLesson($lesson, $lessonSegments);
         $this->userLessons[] = $newUserLesson;
     }
-
-    public function toJson($options = 0)
-    {       
+    public function jsonSerialize()
+    {
         return array('lessons' => $this->userLessons);
     }
+    public function toJson($options = 0)
+    {
+        return json_encode($this, JSON_PRETTY_PRINT);
+    }
+
+
 }

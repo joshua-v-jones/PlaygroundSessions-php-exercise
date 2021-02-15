@@ -3,9 +3,9 @@
 namespace App\Models;
 
 
-use Illuminate\Contracts\Support\Jsonable;
+use JsonSerializable;
 
-class UserLesson implements Jsonable
+class UserLesson implements JsonSerializable
 {
     /**
      * Class variables needed by the model for later access
@@ -33,11 +33,12 @@ class UserLesson implements Jsonable
     public function __construct($lesson, $segments)
     {
         //Set the lesson id
-        $this->lesson_id = $lesson->id;
+        $this->setLesson_id($lesson->id);
         $this->setDifficulty($lesson->difficulty);
         $this->setIsComplete($segments);
     }
-    public function toJson($options = 0)
+
+    public function jsonSerialize()
     {
         return
         [
@@ -145,5 +146,4 @@ class UserLesson implements Jsonable
         }
         $this->isComplete = $isLessonComplete;
     }
-
 }
