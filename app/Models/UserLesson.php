@@ -1,8 +1,11 @@
 <?php
 
-use App\Models;
+namespace App\Models;
 
-class UserLesson implements JsonSerializable
+
+use Illuminate\Contracts\Support\Jsonable;
+
+class UserLesson implements Jsonable
 {
     /**
      * Class variables needed by the model for later access
@@ -38,8 +41,7 @@ class UserLesson implements JsonSerializable
         $this->setDifficulty($lesson->difficulty);
         $this->setIsComplete($segments);
     }
-    
-    public function jsonSerialize()
+    public function toJson($options = 0)
     {
         return
         [
@@ -113,7 +115,7 @@ class UserLesson implements JsonSerializable
     /**
      * This function will be used to determine if a lesson is complete by
      * simply passing the lesson id to the function
-     * @param Models\Segment $segments all practice segments for a lesson
+     * @param Segment $segments all practice segments for a lesson
      */
     public function setIsComplete($segments)
     {
@@ -147,4 +149,5 @@ class UserLesson implements JsonSerializable
         }
         $this->isComplete = $isLessonComplete;
     }
+
 }
