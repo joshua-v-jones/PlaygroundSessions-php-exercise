@@ -10,10 +10,6 @@ class UserLesson implements Jsonable
     /**
      * Class variables needed by the model for later access
      */    
-    //The lesson object that will be used to simplify and decouple the DB calls
-    private $lesson;
-    //All segements for the lesson object
-    private $segments;
     //The lessson ID of the lesson that will be used on construction of the data structure
     private $lesson_id;
     //The difficulty string that will be transformed from numbers to the appropriate string found in the
