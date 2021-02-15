@@ -28,9 +28,7 @@ class UserLesson
      */
     public function __construct($lesson)
     {
-        $this->id = $lesson->id;
-        $this->difficulty = LessonViewModel::getDifficulty($lesson->difficulty);
-        $this->isComplete = LessonViewModel::getIsComplete($lesson->id);
+        $this->lesson = $lesson;
     }
     /**
      * This function will be used to convert the DB value to the desired
