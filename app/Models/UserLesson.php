@@ -5,6 +5,14 @@ namespace App\Models;
 
 use JsonSerializable;
 
+/*
+ *  App\Models\UserLesson
+ *  A JSONSerializable model class used to seperate the data structure 
+ *  defined by the DB schema to the desired simplified structure.
+ *  
+ *  Represent a single Lesson by a user
+ *  
+ */
 class UserLesson implements JsonSerializable
 {
     /**
@@ -38,6 +46,10 @@ class UserLesson implements JsonSerializable
         $this->setIsComplete($segments);
     }
 
+    /*
+     * Required function by JsonSeriliable used to easily get the model in JSON format by calling json_encode
+     * or embedding into another JsonSerialiable object
+     */
     public function jsonSerialize()
     {
         return
@@ -48,7 +60,7 @@ class UserLesson implements JsonSerializable
         ];
     }
     /**
-     * @return mixed
+     * @return int $lesson_id the id of the lesson from the database
      */
     public function getLesson_id()
     {
@@ -56,7 +68,8 @@ class UserLesson implements JsonSerializable
     }
 
     /**
-     * @return string
+     * @return string the difficulty transformed into "Rookie", "Intermediate", "Advanced", or "UNKNOWN" 
+     *  depending on the value contained in the DB object
      */
     public function getDifficulty()
     {
@@ -64,7 +77,8 @@ class UserLesson implements JsonSerializable
     }
 
     /**
-     * @return mixed
+     * @return boolean whether a Lesson is complete
+     *  A lesson is complete if each segment has at least one practice record with a score of 80 or more.
      */
     public function getIsComplete()
     {
@@ -72,19 +86,19 @@ class UserLesson implements JsonSerializable
     }
 
     /**
-     * @param mixed $lesson_id
+     * @param int $lesson_id simple setter
      */
-    public function setLesson_id($lesson_id)
+    private function setLesson_id($lesson_id)
     {
         $this->lesson_id = $lesson_id;
     }
 
     /**
-     * This function will be used to convert the DB value to the desired
+     * Setter for the difficulty used to convert the DB value to the desired
      * string of Rookie [1,2,3] Intermediate[4,5,6] and Advanced[7,8,9]
-     * @param integer $difficulty Must be a vlaue between 1-9
+     * @param integer $difficulty should be a vlaue between 1-9
      */
-    public function setDifficulty($difficulty)
+    private function setDifficulty($difficulty)
     {
         switch ($difficulty)
         {
@@ -110,11 +124,11 @@ class UserLesson implements JsonSerializable
     }
     
     /**
-     * This function will be used to determine if a lesson is complete by
-     * simply passing the lesson id to the function
+     * Setter for the IsComplete boolean used to determine if a lesson is complete 
+     * by iterating the segments and checking the score of practice records
      * @param Segment $segments all practice segments for a lesson
      */
-    public function setIsComplete($segments)
+    private function setIsComplete($segments)
     {
         $isLessonComplete = true;
         //Go through all segments for the current lesson
