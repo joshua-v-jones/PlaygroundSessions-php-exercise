@@ -23,8 +23,8 @@ class LessonViewModel
         //Iterate all lesson for a user and add them to the UserLessons model
         foreach ($lessonsByUserId as $nextLesson)
         {            
-            $lessonSegments = LessonRepository::getLessonSegments($nextLesson->id);
-            $userLessons->addUserLesson($nextLesson, $lessonSegments);
+            //$lessonSegments = LessonRepository::getLessonSegments($nextLesson->id);
+            $userLessons->addUserLesson($nextLesson);
         }
 
         //Simply returning the UserLesson object is all that is needed as Illimunate and JsonSerializable do the rest.

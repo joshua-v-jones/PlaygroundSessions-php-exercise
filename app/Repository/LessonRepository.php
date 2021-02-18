@@ -18,20 +18,11 @@ class LessonRepository
      * @param int $userid
      */
     public static function getLessonsByUser($userId)
-    {
+    {        
         return Lesson::with(['segments','segments.practiceRecords' => function(HasMany $query) use ($userId) {
             $query->where('user_id', $userId);
         }])
         ->where('is_published',true)
-        ->limit(5)
         ->get();
-    }
-    /**
-     * Gets all segments for a particular lesson
-     */
-    public static function getLessonSegments($lessonId)
-    {
-        $segments = Segment::all()->where('lesson_id','=', $lessonId);
-        return $segments;
     }
 }

@@ -26,9 +26,9 @@ class UserLessons implements JsonSerializable, Jsonable
      * @param app\Models\Lesson.php $lesson A single lesson to add to the array of lessons for the User
      * @param app\Models\Segment.php $lessonSegments List of all lesson segments for the given lesson
      */
-    public function addUserLesson($lesson, $lessonSegments)
+    public function addUserLesson($lesson)
     {
-        $newUserLesson = new UserLesson($lesson, $lessonSegments);
+        $newUserLesson = new UserLesson($lesson, $lesson->segments);
         $this->userLessons[] = $newUserLesson;
     }
     /*
